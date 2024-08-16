@@ -16,7 +16,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['ckz8779-django-todo-app.herokuapp.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['ckz8779-django-todo-app-56867531a50b.herokuapp.com', 'localhost', '127.0.0.1']
 
 # Application definition
 INSTALLED_APPS = [
