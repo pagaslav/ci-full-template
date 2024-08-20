@@ -18,8 +18,15 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = development
 
 # Define the allowed hosts for the application (retrieve from environment or default to 'localhost')
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost').split(',')
+# Correct ALLOWED_HOSTS setup
+heroku_hostname = os.environ.get("HEROKU_HOSTNAME", "")
+allowed_hosts_env = os.environ.get("ALLOWED_HOSTS", "")
+localhost = "localhost"
 
+ALLOWED_HOSTS = (heroku_hostname + "," + allowed_hosts_env + "," + localhost).split(",")
+ALLOWED_HOSTS = [host for host in ALLOWED_HOSTS if host]  # Удаляем пустые строки
+
+print(f"ALLOWED_HOSTS: {ALLOWED_HOSTS}")
 print(f"ALLOWED_HOSTS: {ALLOWED_HOSTS}")
 
 print(f"Development mode: {development}")
