@@ -1,9 +1,14 @@
 from django.test import TestCase
 from .models import Item
+from django.contrib.auth import get_user_model
 
 
 
 class TestViews(TestCase):
+    def setUp(self):
+        user = get_user_model().objects.create_user(username='staff-test', password='TestPassword1', is_staff=True)
+        self.client.force_login(user)
+
 
 
     def test_get_todo_list(self):
@@ -30,7 +35,7 @@ class TestViews(TestCase):
 
     def test_can_delete_item(self):
         item = Item.objects.create(name='Test Todo Item')
-        response = self.client.get(f'/delete/{item.id}')
+        response = self.client.post(f'/delete/{item.id}')
         self.assertRedirects(response, '/')
         existing_items = Item.objects.filter(id=item.id)
         self.assertEqual(len(existing_items), 0)
@@ -38,7 +43,7 @@ class TestViews(TestCase):
 
     def test_can_toggle_item(self):
         item = Item.objects.create(name='Test Todo Item', done=True)
-        response = self.client.get(f'/toggle/{item.id}')
+        response = self.client.post(f'/toggle/{item.id}')
         self.assertRedirects(response, '/')
         updated_item = Item.objects.get(id=item.id)
         self.assertFalse(updated_item.done)
@@ -49,3 +54,4 @@ class TestViews(TestCase):
         self.assertRedirects(response, '/')
         updated_item = Item.objects.get(id=item.id)
         self.assertEqual(updated_item.name, 'Updated Name')
+
