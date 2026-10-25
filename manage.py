@@ -2,7 +2,8 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
-import env
+if os.path.isfile("env.py"):
+    import env
 
 
 def main():
@@ -21,3 +22,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+

@@ -16,9 +16,10 @@
                 <td>{{ item.name }}</td>
             {% endif %}
             <td>
-                <a href="/toggle/{{ item.id }}">
-                    <button>Toggle</button>
-                </a>
+                <form method="POST" action="/toggle/{{ item.id }}">
+                    {% csrf_token %}
+                    <button type="submit">Toggle</button>
+                </form>
             </td>
             <td>
                 <a href="/edit/{{ item.id }}">
@@ -26,9 +27,10 @@
                 </a>
             </td>
             <td>
-                <a href="/delete/{{ item.id }}">
-                    <button>Delete</button>
-                </a>
+                <form method="POST" action="/delete/{{ item.id }}">
+                    {% csrf_token %}
+                    <button type="submit">Delete</button>
+                </form>
             </td>
             </tr>
         {% empty %}
