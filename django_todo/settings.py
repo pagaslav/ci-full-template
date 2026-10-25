@@ -26,12 +26,7 @@ localhost = "localhost"
 ALLOWED_HOSTS = (heroku_hostname + "," + allowed_hosts_env + "," + localhost).split(",")
 ALLOWED_HOSTS = [host for host in ALLOWED_HOSTS if host]  # Удаляем пустые строки
 
-print(f"ALLOWED_HOSTS: {ALLOWED_HOSTS}")
-print(f"ALLOWED_HOSTS: {ALLOWED_HOSTS}")
-
-print(f"Development mode: {development}")
-print(f"SECRET_KEY: {SECRET_KEY}")
-print(f"DATABASE_URL: {os.environ.get('DATABASE_URL')}")
+# Never print application secrets or database connection strings.
 
 # Database configuration (switch between SQLite for development and a database URL for production)
 if development:
