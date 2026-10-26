@@ -8,3 +8,11 @@ node_modules/
 .github/
 cloudinary_python.txt
 *.sqlite3
+
+# Runtime database snapshots and SQLite sidecars are not source files.
+*.sqlite
+*.sqlite3
+*.sqlite-*
+*.sqlite3-*
+*.db
+*.db-*
